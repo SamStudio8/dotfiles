@@ -1,0 +1,49 @@
+---
+- hosts: local
+  tasks:
+
+    - name: Install utils
+      dnf: pkg={{ item }} state=latest
+      sudo: yes
+      with_items:
+        - git
+        - vim
+        - wget
+        - htop
+        - tmux
+        - tree
+        - powerline
+
+    - name: Install build tools
+      dnf: pkg={{ item }} state=latest
+      sudo: yes
+      with_items:
+        - gcc
+        - gcc-c++
+        - autoconf
+
+    - name: Install pythony things
+      dnf: pkg={{ item }} state=latest
+      sudo: yes
+      with_items:
+        - python-pip
+        - python-devel
+
+    - name: Install more pythony things
+      pip: name={{ item }} state=latest
+      sudo: yes
+      with_items:
+        - numpy
+        - pandas
+        - pygments
+        - pylint
+        - scikit-learn
+        - requests
+        - pysam
+        - pyvcf
+
+    - name: Copy homefiles
+      synchronize: src=homefiles/ dest=/home/sam/
+
+    - name: Copy configurations
+      synchronize: src=configs/ dest=/home/sam/.config/
