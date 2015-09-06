@@ -12,7 +12,6 @@
         - htop
         - tmux
         - tree
-        - powerline-status
 
     - name: Install build tools
       dnf: pkg={{ item }} state=latest
@@ -40,6 +39,7 @@
       pip: name={{ item }} state=latest
       sudo: yes
       with_items:
+        - powerline-status
         - numpy
         - pandas
         - pygments
