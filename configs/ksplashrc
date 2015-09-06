@@ -1,0 +1,4 @@
+[KSplash]
+Engine=KSplashQML
+Theme=org.kde.breeze.desktop
+ThemeBackground=/home/sam/wallpapers/lock.jpg

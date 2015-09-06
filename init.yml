@@ -62,3 +62,4 @@
     - name: Override powerline-status conf
       copy: src=/home/sam/.config/powerline/bindings/tmux/powerline_tmux_1.8_plus.conf dest=/usr/lib/python2.7/site-packages/powerline/bindings/tmux/powerline_tmux_1.8_plus.conf owner:root group:root mode=0644
       sudo: yes
+
