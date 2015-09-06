@@ -59,7 +59,17 @@
     - name: Copy configurations
       synchronize: src=configs/ dest=/home/sam/.config/
 
-    - name: Override powerline-status conf
-      copy: src=/home/sam/.config/powerline/bindings/tmux/powerline_tmux_1.8_plus.conf dest=/usr/lib/python2.7/site-packages/powerline/bindings/tmux/powerline_tmux_1.8_plus.conf owner:root group:root mode=0644
+    - name: Override SDDM theme configuration
+      copy: src=rootfiles/etc/sddm.conf dest=/etc/sddm.conf owner=root group=root mode=0644
       sudo: yes
 
+    - name: Override SDDM theme background
+      copy: src=rootfiles/usr/share/sddm/themes/breeze/theme.conf.user dest=/usr/share/sddm/themes/breeze/theme.conf.user owner=root group=root mode=0644
+      sudo: yes
+
+    - name: Override powerline-status conf
+      copy: src=configs/powerline/bindings/tmux/powerline_tmux_1.8_plus.conf dest=/usr/lib/python2.7/site-packages/powerline/bindings/tmux/powerline_tmux_1.8_plus.conf owner=root group=root mode=0644
+      sudo: yes
+
+    - name: Unkill kwin
+      action: shell kwin &
