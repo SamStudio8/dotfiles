@@ -78,7 +78,7 @@
       git: repo=ssh://git@github.com:fish-shell/fish-shell.git dest=/home/sam/git/fish-shell version=latest
 
     - name: Make fish-shell
-      shell: autoconf && ./configure && make
+      shell: autoconf && ./configure && make chdir=/home/sam/git/fish-shell
 
     - name: Install fish-shell
       shell: make install chdir=/home/sam/git/fish-shell
