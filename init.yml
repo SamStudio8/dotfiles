@@ -12,7 +12,7 @@
         - htop
         - tmux
         - tree
-        - powerline
+        - powerline-status
 
     - name: Install build tools
       dnf: pkg={{ item }} state=latest
