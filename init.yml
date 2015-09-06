@@ -12,6 +12,7 @@
         - htop
         - tmux
         - tree
+        - gitk
 
     - name: Install build tools
       dnf: pkg={{ item }} state=latest
@@ -48,6 +49,9 @@
         - requests
         - pysam
         - pyvcf
+
+    - name: Kill kwin
+      action: shell pkill kwin
 
     - name: Copy homefiles
       synchronize: src=homefiles/ dest=/home/sam/
