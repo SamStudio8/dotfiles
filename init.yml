@@ -73,3 +73,16 @@
 
     - name: Unkill kwin
       action: shell kwin &
+
+    - name: Get fish-shell
+      git: repo=ssh://git@github.com:fish-shell/fish-shell.git dest=/home/sam/git/fish-shell version=latest
+
+    - name: Make fish-shell
+      shell: autoconf && ./configure && make
+
+    - name: Install fish-shell
+      shell: make install chdir=/home/sam/git/fish-shell
+      sudo: yes
+
+    - name: Change shell
+      shell: chsh -s /usr/local/bin/fish
