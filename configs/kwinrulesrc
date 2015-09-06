@@ -1,0 +1,66 @@
+[1]
+Description=Application settings for slack
+clientmachine=fi
+clientmachinematch=0
+noborder=true
+noborderrule=2
+wmclass=slack
+wmclasscomplete=false
+wmclassmatch=1
+
+[2]
+Description=Application settings for keepass2
+clientmachine=localhost
+clientmachinematch=0
+decocolor=Breeze
+decocolorrule=2
+wmclass=keepass2
+wmclasscomplete=false
+wmclassmatch=1
+
+[3]
+Description=Application settings for google-chrome-stable
+clientmachine=fi
+clientmachinematch=0
+noborder=true
+noborderrule=2
+wmclass=google-chrome-stable
+wmclasscomplete=false
+wmclassmatch=1
+
+[4]
+Description=Application settings for konsole
+clientmachine=localhost
+clientmachinematch=0
+noborder=true
+noborderrule=2
+wmclass=konsole
+wmclasscomplete=false
+wmclassmatch=1
+
+[5]
+Description=Application settings for google-chrome
+clientmachine=fi
+clientmachinematch=0
+noborder=true
+noborderrule=2
+wmclass=google-chrome
+wmclasscomplete=false
+wmclassmatch=1
+
+[General]
+ColorScheme[$d]
+count=5
+fixed[$d]
+font[$d]
+menuFont[$d]
+smallestReadableFont[$d]
+toolBarFont[$d]
+widgetStyle[$d]
+
+[Icons]
+Theme[$d]
+
+[KDE]
+ColorScheme[$d]
+widgetStyle[$d]
