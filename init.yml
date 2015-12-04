@@ -13,6 +13,7 @@
         - tmux
         - tree
         - gitk
+        - strace
 
     - name: Install build tools
       dnf: pkg={{ item }} state=latest
@@ -21,6 +22,10 @@
         - gcc
         - gcc-c++
         - autoconf
+        - cmake
+        - valgrind
+        - debuginfo-install
+        - cscope
 
     - name: Install some pre-reqs
       dnf: pkg={{ item }} state=latest
@@ -36,10 +41,17 @@
         - python-pip
         - python-devel
 
+    - name: Install crap
+      dnf: pkg={{ item }} state=latest
+      sudo: yes
+      with_items:
+        - gummi # a wysiwyg latex editor
+
     - name: Install more pythony things
       pip: name={{ item }} state=latest
       sudo: yes
       with_items:
+        - ipython
         - powerline-status
         - numpy
         - pandas
@@ -49,6 +61,10 @@
         - requests
         - pysam
         - pyvcf
+        - glances
+        - matplotlib
+        - tox
+        - requests
 
     - name: Kill kwin
       action: shell pkill kwin
@@ -86,3 +102,27 @@
 
     - name: Change shell
       shell: chsh -s /usr/local/bin/fish
+
+    - name: Enable rpmfusion
+      shell: dnf install --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+      sudo: yes
+
+    - name: Add Spotify repo
+      shell: dnf config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
+      sudo: yes
+
+    - name: Install Spotify
+      dnf: spotify-client
+      sudo: yes
+
+    - name: Install vlc
+      dnf: pkg=vlc state=latest
+      sudo: yes
+
+    - name: Install texlive
+      dnf: pkg={{ item }} state=latest
+      sudo: yes
+      with_items:
+        - texlive
+        - texlive-minted
+
