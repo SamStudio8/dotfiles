@@ -72,7 +72,7 @@
         - pysam
 #        - pyvcf    Install manually to avoid INFO error
         - glances
-       - matplotlib
+        - matplotlib
         - tox
         - requests
 
