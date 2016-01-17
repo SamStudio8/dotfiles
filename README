@@ -1,0 +1,4 @@
+dnf install ansible python-dnf
+wget https://github.com/SamStudio8/dotfiles/archive/master.zip
+ansible-playbook -i hosts init.yml --ask-become-pass
+ansible-playbook -i hosts ware.yml --ask-become-pass

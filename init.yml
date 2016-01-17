@@ -1,5 +1,6 @@
 ---
 - hosts: local
+
   tasks:
 
     - name: Install utils
@@ -22,10 +23,12 @@
         - gcc
         - gcc-c++
         - autoconf
+        - automake
         - cmake
         - valgrind
-        - debuginfo-install
+#        - debuginfo-install
         - cscope
+        - redhat-rpm-config
 
     - name: Install some pre-reqs
       dnf: pkg={{ item }} state=latest
@@ -33,6 +36,12 @@
       with_items:
         - zlib-devel    # pysam
         - ncurses-devel # fish
+        - libselinux-python # needed to do magic with selinux
+        - freetype-devel # needed to compile matplotlib
+        - blas  # needed for scipy
+        - lapack
+        - blas-devel
+        - lapack-devel
 
     - name: Install pythony things
       dnf: pkg={{ item }} state=latest
@@ -46,7 +55,6 @@
       sudo: yes
       with_items:
         - gummi # a wysiwyg latex editor
-        - gitk
 
     - name: Install more pythony things
       pip: name={{ item }} state=latest
@@ -58,17 +66,18 @@
         - pandas
         - pygments
         - pylint
+        - scipy
         - scikit-learn
         - requests
         - pysam
-        - pyvcf
+#        - pyvcf    Install manually to avoid INFO error
         - glances
-        - matplotlib
+       - matplotlib
         - tox
         - requests
 
-    - name: Kill kwin
-      action: shell pkill kwin
+#    - name: Kill kwin
+#      action: shell pkill kwin
 
     - name: Copy homefiles
       synchronize: src=homefiles/ dest=/home/sam/
@@ -76,23 +85,29 @@
     - name: Copy configurations
       synchronize: src=configs/ dest=/home/sam/.config/
 
-    - name: Override SDDM theme configuration
-      copy: src=rootfiles/etc/sddm.conf dest=/etc/sddm.conf owner=root group=root mode=0644
-      sudo: yes
+#    - name: Override SDDM theme configuration
+#      copy: src=rootfiles/etc/sddm.conf dest=/etc/sddm.conf owner=root group=root mode=0644
+#      sudo: yes
 
-    - name: Override SDDM theme background
-      copy: src=rootfiles/usr/share/sddm/themes/breeze/theme.conf.user dest=/usr/share/sddm/themes/breeze/theme.conf.user owner=root group=root mode=0644
-      sudo: yes
+#    - name: Override SDDM theme background
+#      copy: src=rootfiles/usr/share/sddm/themes/breeze/theme.conf.user dest=/usr/share/sddm/themes/breeze/theme.conf.user owner=root group=root mode=0644
+#      sudo: yes
 
     - name: Override powerline-status conf
       copy: src=configs/powerline/bindings/tmux/powerline_tmux_1.8_plus.conf dest=/usr/lib/python2.7/site-packages/powerline/bindings/tmux/powerline_tmux_1.8_plus.conf owner=root group=root mode=0644
       sudo: yes
 
-    - name: Unkill kwin
-      action: shell kwin &
+    - name: Get powerline fonts
+      git: repo=git://github.com/powerline/fonts.git dest=/home/sam/git/powerline-fonts version=master accept_hostkey=True
+
+    - name: Install powerline fonts
+      shell: bash /home/sam/git/powerline-fonts/install.sh
+
+#    - name: Unkill kwin
+#      action: shell kwin &
 
     - name: Get fish-shell
-      git: repo=ssh://git@github.com:fish-shell/fish-shell.git dest=/home/sam/git/fish-shell version=latest
+      git: repo=git://github.com/fish-shell/fish-shell.git dest=/home/sam/git/fish-shell version=master depth=1 accept_hostkey=True
 
     - name: Make fish-shell
       shell: autoconf && ./configure && make chdir=/home/sam/git/fish-shell
@@ -101,20 +116,25 @@
       shell: make install chdir=/home/sam/git/fish-shell
       sudo: yes
 
+    - name: Append fish to shell list
+      shell: echo '/usr/local/bin/fish' | sudo tee --append /etc/shells
+      sudo: yes
+
     - name: Change shell
-      shell: chsh -s /usr/local/bin/fish
+      shell: chsh -s /usr/local/bin/fish sam
+      sudo: yes
 
     - name: Enable rpmfusion
       shell: dnf install --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
       sudo: yes
 
-    - name: Add Spotify repo
-      shell: dnf config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
-      sudo: yes
+#    - name: Add Spotify repo
+#      shell: dnf config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
+#      sudo: yes
 
-    - name: Install Spotify
-      dnf: spotify-client
-      sudo: yes
+#    - name: Install Spotify
+#      dnf: spotify-client
+#      sudo: yes
 
     - name: Install vlc
       dnf: pkg=vlc state=latest

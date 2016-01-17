@@ -1,0 +1,12 @@
+---
+- hosts: local
+
+  tasks:
+
+    - name: Get PyVCF
+      git: repo=git://github.com/jamescasbon/PyVCF.git dest=/home/sam/git/PyVCF version=master depth=1 accept_hostkey=True
+
+    - name: Install PyCVF
+      shell: python setup.py install chdir=/home/sam/git/PyVCF/
+      sudo: yes
+
