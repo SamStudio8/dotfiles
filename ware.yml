@@ -17,18 +17,11 @@
       git: repo=git://github.com/samtools/samtools.git dest=/home/sam/git/samtools version=master depth=1 accept_hostkey=True
 
     - name: Download autoconf-archive
-      git: repo= git://git.sv.gnu.org/autoconf-archive.git dest=/home/sam/git/autoconf-archive version=master depth=1 accept_hostkey=True
-
-#    - name: Configure htslib
-#      script: samtools.sh /home/sam/git/htslib/
-
-#    - name: Install htslib
-#      shell: make && make install chdir=/home/sam/git/htslib/
-#      sudo: yes
+      git: repo=git://git.sv.gnu.org/autoconf-archive.git dest=/home/sam/git/autoconf-archive version=master depth=1 accept_hostkey=True
 
     - name: Configure samtools
       script: samtools.sh /home/sam/git/samtools/
 
     - name: Install samtools
-      shell: make && make install chdir=/home/sam/git/samtools/
+      shell: make && make install && make install-htslib chdir=/home/sam/git/samtools/
       sudo: yes
