@@ -10,3 +10,22 @@
       shell: python setup.py install chdir=/home/sam/git/PyVCF/
       sudo: yes
 
+    - name: Download htslib
+      git: repo=git://github.com/samtools/htslib.git dest=/home/sam/git/htslib version=master depth=1 accept_hostkey=True
+
+    - name: Download samtools
+      git: repo=git://github.com/samtools/samtools.git dest=/home/sam/git/samtools version=master depth=1 accept_hostkey=True
+
+#    - name: Configure htslib
+#      script: samtools.sh /home/sam/git/htslib/
+
+#    - name: Install htslib
+#      shell: make && make install chdir=/home/sam/git/htslib/
+#      sudo: yes
+
+    - name: Configure samtools
+      script: samtools.sh /home/sam/git/samtools/
+
+    - name: Install samtools
+      shell: make && make install chdir=/home/sam/git/samtools/
+      sudo: yes
