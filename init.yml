@@ -74,7 +74,6 @@
         - glances
         - matplotlib
         - tox
-        - requests
 
 #    - name: Kill kwin
 #      action: shell pkill kwin
@@ -125,7 +124,7 @@
       sudo: yes
 
     - name: Enable rpmfusion
-      shell: dnf install --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+      shell: dnf install --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-23.noarch.rpm http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-23.noarch.rpm
       sudo: yes
 
 #    - name: Add Spotify repo
