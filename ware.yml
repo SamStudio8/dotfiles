@@ -16,6 +16,9 @@
     - name: Download samtools
       git: repo=git://github.com/samtools/samtools.git dest=/home/sam/git/samtools version=master depth=1 accept_hostkey=True
 
+    - name: Download autoconf-archive
+      git: repo= git://git.sv.gnu.org/autoconf-archive.git dest=/home/sam/git/autoconf-archive version=master depth=1 accept_hostkey=True
+
 #    - name: Configure htslib
 #      script: samtools.sh /home/sam/git/htslib/
 
