@@ -126,10 +126,9 @@
     - name: Enable rpmfusion
       dnf: pkg={{ item }} state=latest
       sudo: yes
-          state=present
       with_items:
-          - http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ fedora_current }}.noarch.rpm
-          - http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ fedora_current }}.noarch.rpm
+          - http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-23.noarch.rpm
+          - http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-23.noarch.rpm
 
 #    - name: Add Spotify repo
 #      shell: dnf config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
