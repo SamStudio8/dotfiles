@@ -119,3 +119,14 @@ noremap <buffer> <silent> <Down> gj
 
 " Vim sensible
 let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u00b7"
+
+" Sensible movement
+noremap  k gk
+noremap  j gj
+noremap <UP> gk
+noremap <DOWN>  gj
+
+let g:tex_flavor='latex'
+
+" Stop fucking adding numbers
+map <C-a> <Nop>

@@ -29,6 +29,7 @@
 #        - debuginfo-install
         - cscope
         - redhat-rpm-config
+        - perf
 
     - name: Install some pre-reqs
       dnf: pkg={{ item }} state=latest
@@ -49,6 +50,10 @@
       with_items:
         - python-pip
         - python-devel
+        - sphinx
+        - wheel
+        - mock
+        - sphinxcontrib-napoleon
 
     - name: Install crap
       dnf: pkg={{ item }} state=latest
@@ -149,3 +154,9 @@
         - texlive
         - texlive-minted
 
+    - name: Stuff...
+      dnf: pkg={{ item }} state=latest
+      sudo: yes
+      with_items:
+          - gstreamer1-libav
+          - pandoc
