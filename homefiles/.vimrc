@@ -30,9 +30,15 @@ set colorcolumn=80
 set scrolloff=3
 
 " Visual
-let g:solarized_termcolors=256
+"let g:solarized_termcolors=256
+"color OceanicNext
+"color colorsbox-stblue
+"color flattown
+"color wombat256
 set background=dark
-color inkpot
+"color inkpot
+"color gruvbox
+color jellybeans
 "color solarized
 
 set showmatch "Show matching parens
@@ -43,6 +49,7 @@ set cursorline
 set numberwidth=5
 
 " Intentation
+set formatoptions+=rc
 set expandtab
 set smarttab
 set shiftround
